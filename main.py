@@ -1,39 +1,25 @@
-import plug_power
+#!/usr/bin/env python
+from PlugPower import PlugPower
 import time
-import pigpio
-import sys
 
-'Pinos seguindo BCM'
-invRelayPin = 27
-coolerRelayPin = 22
-
-pi = pigpio.pi()
-
-pi.set_mode(invRelayPin, pigpio.OUTPUT)
-pi.set_mode(coolerRelayPin, pigpio.OUTPUT)
-
-if len(sys.argv) > 1:
-	'testing routine'
-    
-	if int(sys.argv[1]):
-		pi.write(invRelayPin, 1)
-		pi.write(coolerRelayPi, 1)
-	else:
-		pi.write(invRelayPin, 0)
-		pi.write(coolerRelayPi, 0)
-	
-    quit()
+outletPin = 4
+lightPin = 17
 
 def check_power(pp):
-    pp.check_hour()
-    pi.write(invRelayPin, pp.state)
-	pi.write(coolerRelayPin, pp.state)
+	pp.check_hour()
+    pi.write(pin1, pp.state1)
+    pi.write(pin2, pp.state2)
     while True:
         time.sleep(300)
-        if pp.check_hour():
-			pi.write(invRelayPin, not pi.read(invRelayPin))
-			pi.write(coolerRelayPi, not pi.read(coolerRelayPin))
+		pp.check_hour()
+        if pp.state_change1:
+			#Arrumar Aqui
+            pi.write(pin1, pp.state1)
+		if pp.state_change2:
+			#Arrumar Aqui
+			pi.write(pin2, pp.state2)
 
+plug = PlugPower(outletPin, lightPin)
 
-plug = plug_power.plug_power()
-check_power(plug)
+while True:
+	plug.check()
