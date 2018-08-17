@@ -19,11 +19,11 @@ class plug_power:
 			if (self.state1 == 0):
 				self.state1 = 1
 				self.state_change1 = 1
-		if (self.date.hour >= 18):
+		if (self.date.hour >= 18) and (self.data.hour < 23):
 			if(self.state2 == 0):
 				self.state2 = 1
 				self.state_change2 = 1
-		elif (self.date.hour >= 4):
+		elif (self.date.hour >= 23) or (self.date.hour < 18):
 			if(self.state2 == 1):
 				self.state2 = 0
 				self.state_change2 = 1
