@@ -1,10 +1,9 @@
 from datetime import datetime
-class plug_power:
+
+class PlugPower:
 	def __init__(self):
 		self.state1 = 0 #0 = off; 1 = on
-		self.state2 = 0
 		self.state_change1 = 0
-		self.state_change2 = 0
 		self.date = datetime.now()
 
 	def check_hour(self):
@@ -19,12 +18,4 @@ class plug_power:
 			if (self.state1 == 0):
 				self.state1 = 1
 				self.state_change1 = 1
-		if (self.date.hour >= 18) and (self.date.hour < 21):
-			if(self.state2 == 0):
-				self.state2 = 1
-				self.state_change2 = 1
-		else:
-			if(self.state2 == 1):
-				self.state2 = 0
-				self.state_change2 = 1
 
